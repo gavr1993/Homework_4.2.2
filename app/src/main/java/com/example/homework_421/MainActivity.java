@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ListView listView = findViewById(R.id.listView);
         fillImages();
-        generateRandomItemData();
         adapter = new ItemsDataAdapter(this, null);
+        generateRandomItemData();
         listView.setAdapter(adapter);
     }
 
@@ -41,8 +41,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateRandomItemData() {
-        adapter.addItem(new ItemData( android.R.drawable.ic_menu_report_image,
-                "Name of item",
-                "category"));
+        int counter = 1;
+        while (counter < 51) {
+            adapter.addItem(new ItemData(images.get(random.nextInt(images.size())),
+                    getString(R.string.name) + counter,
+                    getString(R.string.category) + counter));
+            counter++;
+        }
     }
 }

@@ -8,7 +8,7 @@ public class ItemData {
     private String title;
     private String subtitle;
 
-    public ItemData(int image, String title, String subtitle) {
+    public ItemData(Drawable image, String title, String subtitle) {
         this.image = image;
         this.title = title;
         this.subtitle = subtitle;
