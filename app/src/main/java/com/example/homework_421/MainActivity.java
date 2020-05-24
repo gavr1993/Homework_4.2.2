@@ -5,7 +5,11 @@ import androidx.core.content.ContextCompat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +24,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView listView = findViewById(R.id.listView);
+        final ListView listView = findViewById(R.id.listView);
         fillImages();
         adapter = new ItemsDataAdapter(this, null);
         generateRandomItemData();
         listView.setAdapter(adapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showItemData(position);
+                return true;
+            }
+        });
+    }
+
+    private void showItemData(int position) {
+        ItemData itemData = adapter.getItem(position);
+        Toast.makeText(MainActivity.this,
+                "Title: " + itemData.getTitle() + "\n" +
+                        "Subtitle: " + itemData.getSubtitle(), Toast.LENGTH_SHORT).show();
     }
 
     private void fillImages() {
@@ -49,4 +67,6 @@ public class MainActivity extends AppCompatActivity {
             counter++;
         }
     }
+
+
 }
